@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nombre": "Matcha Ceremonial Japonés",
+    "categoria": "Té Exótico",
+    "precio": 35000,
+    "stock": 15
+  },
+  {
+    "id": 2,
+    "nombre": "Energy Bolt Neón - Dragón Fruit",
+    "categoria": "Bebida Energética",
+    "precio": 12000,
+    "stock": 30
+  }
+]
