@@ -16,9 +16,47 @@
     <div id="contenedor-productos"></div>
 
     <script>
-        // En el futuro, aquí escribiremos el código (fetch) 
-        // para leer productos.json y mostrarlos en la pantalla
-        console.log("Página de catálogo inicializada.");
+<!-- Aquí aparecerán los productos cargados desde el JSON -->
+    <div id="contenedor-productos"></div>
+
+    <script>
+        const contenedor = document.getElementById('contenedor-productos');
+
+        async function cargarProductos() {
+            try {
+                const respuesta = await fetch('./productos.json'); 
+                if (!respuesta.ok) {
+                    throw new Error(`HTTP error! status: ${respuesta.status}`);
+                }
+                const productos = await fetch('./productos.json').then(res => res.json());
+                mostrarProductos(productos);
+            } catch (error) {
+                console.error("Error al cargar los productos:", error);
+                contenedor.innerHTML = "<p>Error al cargar el catálogo.</p>";
+            }
+        }
+
+        function mostrarProductos(listaProductos) {
+            contenedor.innerHTML = '';
+            listaProductos.forEach(producto => {
+                const divProducto = document.createElement('div');
+                divProducto.className = 'producto';
+                divProducto.innerHTML = `
+                    <h3>${producto.nombre}</h3>
+                    <p><strong>Categoría:</strong> ${producto.categoria}</p>
+                    <p><strong>Precio:</strong> $${producto.precio}</p>
+                    <p><strong>Stock disponible:</strong> ${producto.stock}</p>
+                    <button onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
+                `;
+                contenedor.appendChild(divProducto);
+            });
+        }
+
+        function agregarAlCarrito(idProducto) {
+            alert("Producto con ID " + idProducto + " agregado al carrito (Simulación).");
+        }
+
+        cargarProductos();
     </script>
 </body>
 </html>
